@@ -1,3 +1,6 @@
+done in a zsh shell, which extends a bash shell (its for my work flow)
+used arch, but should still be applicable to bash / linux in general
+
 git init
 git clone https://github.com/jrempelsmith/CardGame.git
 mkdir ./Card\ Game
@@ -20,6 +23,9 @@ I did put a passphrase in, you should do so too
 
 cat ~/.ssh/id_ed25519.pub
 Then take the text that you get from that file and put it in https://github.com/settings/ssh/new
+
+when doing pulls, use rebase
+git pull --rebase
 
 // Troubleshooting
 Before I had main as the remote repo, I accidentally set it to master and it created a new repository entirely.
