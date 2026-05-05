@@ -1,0 +1,41 @@
+git init
+git clone https://github.com/jrempelsmith/CardGame.git
+mkdir ./Card\ Game
+mv ./CardGame/src/* ./Card\ Game
+rm -rf ./CardGame
+git add .
+git remote set-url main git@github.com:drnstel/comp-sci-12-repo.git
+git remote add master git@github.com:drnstel/comp-sci-12-repo.git
+
+// I forgot I need credentials so I did this here
+git config --global user.name "drnstel"
+git config --global user.email "noimnotputtingmyemailhere@gmail.com"
+
+git commit -m "text here for commit message"
+git push --set-upstream main main
+
+// I needed to create a ssh key so I just did this
+ssh-keygen -t ed25519
+I did put a passphrase in, you should do so too
+
+cat ~/.ssh/id_ed25519.pub
+Then take the text that you get from that file and put it in https://github.com/settings/ssh/new
+
+// Troubleshooting
+Before I had main as the remote repo, I accidentally set it to master and it created a new repository entirely.
+I fixed it after like 20 minutes
+
+git push --set-upstream main main // wouldnt work because it was still referencing master
+git remote -v // game me master as a fetch/push
+
+do the remote set-url and remote add
+
+i also had the original clone from a separate repo so I had to separate it from its cloned state to a "modified" state
+
+git branch -M main
+git add .
+git commit -m "test"
+git push --set-upstream main main // rejected for being 3 commits behind
+git pull --rebase main main
+git push main --delete master
+git push main main
