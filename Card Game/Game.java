@@ -117,7 +117,7 @@ public class Game {
                 System.out.println(currentPlayer.getName() + " drew a " + damageCard + " from the Damage deck.");
 
                 // pick a random player (but not oneself) to apply the damage card to
-                boolean selectedAnotherPlayer = false;
+                boolean selectedAnotherPlayer = falupse;
                 Player otherPlayer = null;
 
                 while (!selectedAnotherPlayer) {
