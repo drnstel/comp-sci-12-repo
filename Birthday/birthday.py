@@ -1,22 +1,7 @@
 from random import randint as rand
+import matplotlib.pyplot as pypl
 
-# if i have 10 people in a room, what is the likelihood
-# that at least two of them share a bday?
-
-# LOOP
-#   1. generate 10 birthdays (def generate_birthdays(10)...)
-#   1.1: ...
-#   1.2: ...
-
-#   2. check if anybody shares a birthday
-
-#   3. count how many times there is a match
-
-# (end loop) 
-
-# do some math to calculate the probability
-
-def generate_birthdays(people: int=1):
+def generate_birthdays(people: int=1) -> list:
     listOfBirthdays: list = []
     
     for i in range(0, people+1):
@@ -39,7 +24,7 @@ def generate_birthdays(people: int=1):
     
     return listOfBirthdays
     
-def duplicate_birthday_checker(listOfBirthdays: list=[]):
+def duplicate_birthday_checker(listOfBirthdays: list=[]) -> int:
     tempMonth: int
     tempDay: int
     duplicateCount: int = 0
@@ -54,32 +39,37 @@ def duplicate_birthday_checker(listOfBirthdays: list=[]):
     
     return duplicateCount
             
+def run(people: int=2, trials: int=1) -> float:
+    matches: int = 0
 
-def main():
-    continueLoop: bool = True
-    validation: int = 1 # 0 is true, 1 is false
-    
-    while continueLoop:
-        validation = 1
-        birthdayList: list = generate_birthdays(10)
-        duplicateBirthdays: int = duplicate_birthday_checker(birthdayList)
-    
-        print(birthdayList)
-        print(f"Duplicate birthdays count: {duplicateBirthdays} birthdays are duplicates")
-        while validation == 1:
-            checker: str = input("Would you like to loop again? (y/n)\n> ")
-            checker.lower()
+    for i in range(trials):
+        birthdays = generate_birthdays(people)
+
+        if (duplicate_birthday_checker(birthdays) != 0):
+            matches += 1
+
+    return matches / trials
+
+def create_y_points(results: float=1, points: list=[]) -> list:
+    points.append(results)
+
+    return points
+
+def generate_graph(x_points: list=[], y_points: list=[]) -> None:
+    pypl.plot(x_points, y_points)
+
+    return pypl.show()
+
+def main() -> None:
+    groups_of_people: list = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+    results: list = []
+
+    for i in groups_of_people:
+        simulationResults: float = run(i, 1000)
+        create_y_points(simulationResults, results)
         
-            if (checker == "y"):
-                validation = 0
-                continueLoop = True
-            elif (checker == "n"):
-                validation = 0
-                continueLoop = False
-            else:
-                print("Not a valid input.")
-                validation = 1
+    generate_graph(groups_of_people, results)
+
     return
-        
-main()
 
+main()
