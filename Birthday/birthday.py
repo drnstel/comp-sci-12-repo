@@ -67,7 +67,8 @@ def main() -> None:
     for i in groups_of_people:
         simulationResults: float = run(i, 1000)
         create_y_points(simulationResults, results)
-        
+        print(f"Results for group of {groups_of_people[i-10]}: {simulationResults}")
+
     generate_graph(groups_of_people, results)
 
     return
